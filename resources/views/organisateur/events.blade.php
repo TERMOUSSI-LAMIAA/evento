@@ -21,14 +21,18 @@
                     <p class="text-gray-600 mb-2">Location: {{ $event->lieu }}</p>
                     <p class="text-gray-600 mb-2">Seats Available: {{ $event->nbr_places }}</p>
 
-                    <!-- Add more event details as needed -->
+                    <!-- Action buttons -->
+                    <div class="flex space-x-2">
+                        <!-- Update button -->
+                        <a href="{{route('updtFormEvent',['id' => $event->id])}}" class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-700">Update</a>
 
-                    <!-- Delete form -->
-                    <form action="" method="POST" class="mt-2">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="text-red-500 hover:text-red-700">Delete</button>
-                    </form>
+                        <!-- Delete form -->
+                       <form action="{{route('deleteEvent',['id'=> $event->id])}}"   method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-700">Delete</button>
+                        </form>
+                    </div>
                 </div>
             @empty
                 <p class="text-gray-600">No events available</p>
