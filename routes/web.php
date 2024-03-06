@@ -39,8 +39,10 @@ Route::middleware(['auth', 'verified','role:organisateur'])->group(function () {
     // Route::resource('/Article',ArticleController::class); 
 
 });
+Route::get('/getEvents',[EvenementsController::class,"getEvents"])->name("getEvents");
 Route::get('/addEvent',[EvenementsController::class,"addform"])->name("addform");
 Route::get('/categories',[CategoriesController::class,"getCatgs"])->name("getCatgs");
 Route::get('/addCatgForm',[CategoriesController::class,"addCatgForm"])->name("addCatgForm");
 Route::post('/addCatg',[CategoriesController::class,"addCatg"])->name("addCatg");
+Route::post('/storeEvent',[EvenementsController::class,"addEvent"])->name("storeEvent");
 require __DIR__.'/auth.php';

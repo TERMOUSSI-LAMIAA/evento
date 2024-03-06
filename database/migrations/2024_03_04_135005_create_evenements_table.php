@@ -14,15 +14,17 @@ return new class extends Migration
         Schema::create('evenements', function (Blueprint $table) {
             $table->id();
             $table->string("titre");
-            $table->string("description");
+            $table->text("description");
             $table->datetime("date");
             $table->string("lieu");
             $table->string("duree");
             $table->integer("nbr_places");
             $table->enum("acceptation",["automatique","manuelle"]);
-            $table->boolean("is_valid");
+            $table->boolean("is_valid")->default(0);
             $table->string("img");
-            $table->decimal("prix");
+            $table->decimal('prix', 10, 2);
+            $table->foreignId('categorie_id')->constrained('categories');
+            $table->foreignId('organisateur_id')->nullable()->constrained('users');
             $table->softDeletes(); 
             $table->timestamps();
         });

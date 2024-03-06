@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="slot">
         <div class="container mx-auto">
-            <form method="POST" action="" enctype="multipart/form-data">
+            <form method="POST" action="{{route('storeEvent')}}" enctype="multipart/form-data">
                 @csrf
 
                 <div class="mb-4">
@@ -49,7 +49,17 @@
 
                 <div class="mb-4">
                     <label for="prix" class="block text-gray-700 text-sm font-bold mb-2">Prix:</label>
-                    <input type="text" name="prix" id="prix" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+                    <input type="number" name="prix" id="prix" step="0.01" min="0" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+                </div>
+
+                <!-- Select for Categories -->
+                <div class="mb-4">
+                    <label for="category" class="block text-gray-700 text-sm font-bold  mb-2">Select Category:</label>
+                    <select id="category" name="category" class="bg-white border        border-gray-300 rounded px-4 py-2">
+                        @foreach ($categories as $category)
+                            <option value="{{ $category->id }}">{{ $category->titre }}</option>
+                        @endforeach
+                    </select>
                 </div>
 
                 <div class="mb-4">

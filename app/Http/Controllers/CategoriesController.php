@@ -29,4 +29,6 @@ class CategoriesController extends Controller
         $catgs=Categories::all();
         return view("admin.categories",compact("catgs"));
     }
+
+    
 }

@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('reservations', function (Blueprint $table) {
             $table->id();
             $table->boolean("is_valid");
+            $table->foreignId('client_id')->constrained('users');
+            $table->foreignId('evenement_id')->constrained('evenements');
             $table->softDeletes(); 
             $table->timestamps();
         });
