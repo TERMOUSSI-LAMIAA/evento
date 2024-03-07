@@ -39,12 +39,15 @@ Route::middleware(['auth', 'verified','role:organisateur'])->group(function () {
     // Route::resource('/Article',ArticleController::class); 
 
 });
+Route::get('/getAllEvent',[EvenementsController::class,"getAllEvent"])->name("getAllEvent");
 Route::get('/getEvents',[EvenementsController::class,"getEvents"])->name("getEvents");
+Route::get('/details/{id}',[EvenementsController::class,"getDetails"])->name("details");
 Route::get('/addEvent',[EvenementsController::class,"addform"])->name("addform");
 Route::get('/categories',[CategoriesController::class,"getCatgs"])->name("getCatgs");
 Route::get('/updtFormEvent/{id}',[EvenementsController::class,"updtForm"])->name("updtFormEvent");
 Route::get('/addCatgForm',[CategoriesController::class,"addCatgForm"])->name("addCatgForm");
 Route::post('/addCatg',[CategoriesController::class,"addCatg"])->name("addCatg");
+Route::post('/reserveEvent/{id}',[EvenementsController::class,"reserveEvent"])->name("reserveEvent");
 Route::post('/storeEvent',[EvenementsController::class,"addEvent"])->name("storeEvent");
 Route::put('/updtEvent',[EvenementsController::class,"updtEvent"])->name("updtEvent");
 Route::delete('/deleteEvent/{id}',[EvenementsController::class,"deleteEvent"])->name("deleteEvent");

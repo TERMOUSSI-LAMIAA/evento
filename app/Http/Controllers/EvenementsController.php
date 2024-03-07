@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Evenements;
-use App\Models\Categories;
+use App\Models\Categories;     
+use App\Models\Reservations;     
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
@@ -13,13 +14,21 @@ use Illuminate\Support\Facades\Storage;
 class EvenementsController extends Controller
 {
     public function getEvents(){
-        //!events for the authentified user
+
         $organisateur_id=Auth::id();
         $events=Evenements::where('organisateur_id',$organisateur_id)->get();
         
         return view("organisateur.events",compact("events"));
     }
 
+    public function getAllEvent(){
+          $events=Evenements::all();
+          return view("client.events",compact('events'));
+    }
+    public function getDetails($id){
+        $event=Evenements::find($id);
+        return view("client.details",compact('event'));
+    }
     public function addform(){
         $categories=Categories::all();
         return view('organisateur.create_event',compact("categories"));
@@ -86,9 +95,28 @@ class EvenementsController extends Controller
         $event->update();
         return redirect()->route('getEvents')->with('success', 'Event updated successfully');
     }
+
     public function deleteEvent($id){
         $event=Evenements::find($id);
         $event->delete();
         return redirect()->back()->with('success', 'Event deleted successfully');
+    }
+
+    public function reserveEvent($id){
+        $client=Auth::id();
+        $event=Evenements::find($id);
+        $reservation=new Reservations([
+            "client_id"=>$client,
+            "evenement_id"=>$id,
+        ]);
+        if($event->acceptation==="automatique")
+        {
+            $reservation->is_valid = 1;
+        }else{
+            $reservation->is_valid = 0;
+        }
+        $reservation->save();
+        return redirect()->route('getAllEvent')->with('success','Réservation effectuée avec succés');
+
     }
 }
