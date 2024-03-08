@@ -78,7 +78,8 @@ class EvenementsController extends Controller
     }
 
     public function updtEvent(Request $request){
-        //!validate
+        //todo:validate
+        //! check if the event doesn't have reservations
         $event=Evenements::find($request->id);
         $event->titre=$request->titre;
         $event->description=$request->description;

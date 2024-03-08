@@ -16,7 +16,7 @@ class Categories extends Model
 
     public function evenements()
     {
-        return $this->hasMany(Event::class);
+        return $this->hasMany(Evenements::class);
     }
 
 }

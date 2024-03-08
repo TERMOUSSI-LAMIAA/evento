@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EvenementsController;
 use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,9 +47,16 @@ Route::get('/addEvent',[EvenementsController::class,"addform"])->name("addform")
 Route::get('/categories',[CategoriesController::class,"getCatgs"])->name("getCatgs");
 Route::get('/updtFormEvent/{id}',[EvenementsController::class,"updtForm"])->name("updtFormEvent");
 Route::get('/addCatgForm',[CategoriesController::class,"addCatgForm"])->name("addCatgForm");
+Route::get('/updateCatgForm/{id}',[CategoriesController::class,"updateCatgForm"])->name("updateCatgForm");
+Route::get('/getUsers',[UserController::class,"getUsers"])->name("getUsers");
+//?
+Route::post('/restrictUser/{id}',[UserController::class,"restrictUser"])->name("restrictUser");
+//?
 Route::post('/addCatg',[CategoriesController::class,"addCatg"])->name("addCatg");
+Route::put('/updateCatg',[CategoriesController::class,"updateCatg"])->name("updateCatg");
 Route::post('/reserveEvent/{id}',[EvenementsController::class,"reserveEvent"])->name("reserveEvent");
 Route::post('/storeEvent',[EvenementsController::class,"addEvent"])->name("storeEvent");
 Route::put('/updtEvent',[EvenementsController::class,"updtEvent"])->name("updtEvent");
 Route::delete('/deleteEvent/{id}',[EvenementsController::class,"deleteEvent"])->name("deleteEvent");
+Route::delete('/deleteCatg/{id}',[CategoriesController::class,"deleteCatg"])->name("deleteCatg");
 require __DIR__.'/auth.php';

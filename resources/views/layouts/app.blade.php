@@ -31,7 +31,11 @@
                     {{ session('success') }}
                 </div>
             @endif
-
+            @if(session('error'))
+                <div class="bg-red-200 p-3 mb-4 rounded">
+                    {{ session('error') }}
+                </div>
+            @endif
             <!-- Page Content -->
             <main>
                 {{ $slot }}
