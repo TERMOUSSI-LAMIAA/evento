@@ -3,6 +3,20 @@
         <div class="container mx-auto">
             <div class="flex justify-between items-center mb-4">
                 <h2 class="text-2xl font-bold">Events</h2>
+                <label for="category" class="mr-2">Filter by Category:</label>
+                    <select name="category" id="category" onchange="this.form.submit()">
+                        @foreach($categories as $category)
+                            <option value="{{ $category->id }}" {{ request('category') == $category->id ? 'selected' : '' }}>
+                                {{ $category->titre}}
+                            </option>
+                        @endforeach
+                    </select>
+                 <form action="{{route('search')}}" method="GET" class="flex space-x-2">
+                    <!-- Search bar -->
+                    <input type="text" name="search" placeholder="Search by title"  class="px-4 py-2 border rounded">
+
+                    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700">Search</button>
+                </form>
             </div>
 
             @forelse($events as $event)

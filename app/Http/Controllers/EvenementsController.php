@@ -22,8 +22,9 @@ class EvenementsController extends Controller
     }
 
     public function getAllEvent(){
+        $categories=Categories::all();
           $events=Evenements::all();
-          return view("client.events",compact('events'));
+          return view("client.events",compact('events','categories'));
     }
     public function getDetails($id){
         $event=Evenements::find($id);
@@ -119,5 +120,10 @@ class EvenementsController extends Controller
         $reservation->save();
         return redirect()->route('getAllEvent')->with('success','Réservation effectuée avec succés');
 
+    }
+
+    public function searchByTitle(Request $request){
+        $events=Evenements::where("titre","like","%".$request->search."%")->get();
+        return view("client.searchResult",compact("events"));
     }
 }

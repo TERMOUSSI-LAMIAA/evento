@@ -52,6 +52,7 @@ Route::get('/getUsers',[UserController::class,"getUsers"])->name("getUsers");
 //?
 Route::post('/restrictUser/{id}',[UserController::class,"restrictUser"])->name("restrictUser");
 //?
+Route::get('/search',[EvenementsController::class,"searchByTitle"])->name("search");
 Route::post('/addCatg',[CategoriesController::class,"addCatg"])->name("addCatg");
 Route::put('/updateCatg',[CategoriesController::class,"updateCatg"])->name("updateCatg");
 Route::post('/reserveEvent/{id}',[EvenementsController::class,"reserveEvent"])->name("reserveEvent");
